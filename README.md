@@ -14,7 +14,7 @@ Unfortunately this Load function will need to be present within any workbook wan
 
     let Load = (fnName as text) =>
     let
-        BasePath = "C:\PQuery\",
+        BasePath = "C:\pquery\",
         File = BasePath & fnName & ".m",
         Source = Text.FromBinary(File.Contents(File)),
         Function = Expression.Evaluate(Source, #shared)
