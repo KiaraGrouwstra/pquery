@@ -28,7 +28,7 @@ Unfortunately this Load function will need to be present within any workbook wan
 
 The main point here is that by separating universally useful functions from an individual workbook, you will feel encouraged to use more modular code, solving each common sub-problem only once, rather than remaining stuck in 'vanilla' M and resolving the same problems repeatedly.
 
-Moreover, coding this way will also facilitate sharing code with other Power Query users (without requiring a Power BI subscription), allowing for a more collaborative environment.
+Moreover, coding this way will also further facilitate sharing code with other Power Query users, allowing for a more collaborative environment.
 
 Admittedly, Microsoft languages have rarely been known for encouraging open-source collaboration, and the Power Query community is currently small. But will that mean we cannot assemble a powerful code library like those of the JavaScript community?
 
