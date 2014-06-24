@@ -1,7 +1,7 @@
 pquery
 ======
 
-This is a collection of functions written in the M language for use in Microsoft Excel's Power Query plugin (http://office.microsoft.com/en-us/excel/download-microsoft-power-query-for-excel-FX104018616.aspx).
+This is a collection of functions written in the M language for use in Microsoft Excel's [Power Query plugin](http://office.microsoft.com/en-us/excel/download-microsoft-power-query-for-excel-FX104018616.aspx).
 
 Rather than manually adding the functions to different Excel workbooks, users can instead leave their files in any directory, and dynamically load them from Power Query using something like the function below (adjust the hard-coded file path to match the directory you put them in).
 
