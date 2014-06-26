@@ -12,15 +12,20 @@
 let
     Text.ReplaceAll = (str as text, Replacements as list) =>
 let
-    NextReplace = Replacements{0},
-    Cleaned = Text.Replace(str,NextReplace{0}, NextReplace{1}),
-    ReplLeft = List.Skip(Replacements),
-    Text.ReplaceAll = Load("Text.ReplaceAll"),
-    Return = if List.IsEmpty(ReplLeft)
-		then Cleaned
-		else Text.ReplaceAll(Cleaned, ReplLeft)
+	count = List.Count(Replacements)
 in
-    Return
+
+List.Last(
+	List.Generate(
+		()=>[i=0, s=str],
+		each [i] < count,
+		each [
+			s=Text.Replace([s],Replacements{[i]}{0},Replacements{[i]}{1}),
+			i=[i]+1
+		],
+		each [s]
+	)
+)
 
 in Text.ReplaceAll
 

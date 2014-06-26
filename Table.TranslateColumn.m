@@ -2,9 +2,9 @@
 //Makes a 'translated' column simultaneously executing multiple replaces on the original (using a list of lists as a 'translation sheet')
 //Usage:
     Table.TranslateColumn = Load("Table.TranslateColumn"),
-    Tbl = Table.FromRecords({ [可能="不可"], [可能="可"] }),
+    Tbl = #table({"可能"},{{"不可"},{"可"}}),
     Table.TranslateColumn(Tbl, "可能", "Possible", {{"不可", "Nope"},{"可","Yes"}})
-//Result: Table.FromRecords({ [Possible="Nope"], [Possible="Yes"] })
+//Result: #table({"Possible"},{{"Nope"},{"Yes"}})
 */
 
 let Table.TranslateColumn = (Tbl as table, OldCol as text, NewColName as text, TranslationList as list) =>
