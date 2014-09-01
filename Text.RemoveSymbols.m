@@ -2,10 +2,10 @@
 //Remove all uicode symbols from text
 //Originally written by Chris Webb: https://cwebbbi.wordpress.com/2014/08/18/removing-punctuation-from-text-in-power-query/
 //Usage:
-    Table.ExpandAll = Load("Table.ExpandAll"),
-    xml = Xml.Tables("<books><book><name>Book1</name><pages><page>1</page><page>2</page><page>3</page></pages></book><book><name>Book2</name><pages><page>1</page><page>2</page><page>3</page></pages></book></books>"),
-    Table.ExpandAll(xml)	//, null, true
-//Result: [an expanded version of the given table with nested records/tables]
+    Text.RemoveSymbols = Load("Text.RemoveSymbols"),
+    newText = Text.RemoveSymbols("a,b,c")
+    newText	
+//Result: newText = "abc"
 */
 let (inputtext) =>
 let
