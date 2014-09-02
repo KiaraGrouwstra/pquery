@@ -18,7 +18,7 @@ in
 List.Last(
 	List.Generate(
 		()=>[i=0, s=str],
-		each [i] < count,
+		each [i] <= count,
 		each [
 			s=Text.Replace([s],Replacements{[i]}{0},Replacements{[i]}{1}),
 			i=[i]+1

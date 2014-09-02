@@ -4,7 +4,7 @@
     Table.CrossJoin = Load("Table.CrossJoin"),
     Table.CrossJoin({"A","B"},{1..3})	//list version
 	TableA = #table({"A"},{{"A"},{"B"}}),
-	TableA = #table({"B"},{{1},{2},{3}}),
+	TableB = #table({"B"},{{1},{2},{3}}),
     Table.CrossJoin(TableA, TableB)		//table version
 //Result: #table({"A","B"},{{"A",1},{"A",2},{"A",3},{"B",1},{"B",2},{"B",3}})
 */

@@ -7,7 +7,7 @@
 */
 
 let
-    (seconds as number, action as function) =>
+    Misc.Wait = (seconds as number, action as function) =>
 
     if (
         List.Count(

@@ -6,12 +6,10 @@
 //Result: "de"
 */
 
-let Text.Between = (Haystack as text, After as text, Before as text) =>
+let Text.Between = (Haystack as text, After as text, Before as text, optional Backward as logical) =>
 let
-    CutAfter = Text.Split(Haystack, After){1},
-    Needle = Text.Split(CutAfter, Before){0}
-in 
-    Needle
-in
-    Text.Between
+    CutAfter = if Backward = true then Text.Split(Haystack, Before){0} else Text.Split(Haystack, After){1},
+    Needle = if Backward = true then List.Last(Text.Split(CutAfter, After)) else Text.Split(CutAfter, Before){0}
+in Needle
+in Text.Between
 

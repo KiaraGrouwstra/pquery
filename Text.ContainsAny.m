@@ -15,7 +15,7 @@ in
 List.AnyTrue(
 	List.Generate(
 		()=>[i=0],
-		each [i] < count,
+		each [i] <= count,
 		each [i=[i]+1],
 		each Text.Contains(str,needles{[i]})
 	)
