@@ -8,7 +8,7 @@
 let SheetsInFolder = (folderPath as text) =>
 let
     Source = Folder.Files(folderPath),
-    FilteredRows = Table.SelectRows(Source, each Text.Start("[Extension]",3) = ".xl"),
+    FilteredRows = Table.SelectRows(Source, each Text.Start([Extension],3) = ".xl"),
     RemovedOtherColumns = Table.SelectColumns(FilteredRows,{"Content", "Name"}),
     NoTemps = Table.SelectRows(RemovedOtherColumns, each not Text.StartsWith([Name], "~$")),
     InsertedCustom = Table.AddColumn(NoTemps, "Sheets", each Excel.Workbook([Content])),
