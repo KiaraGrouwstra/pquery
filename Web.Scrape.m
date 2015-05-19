@@ -6,15 +6,16 @@
 //Result: a binary representation of the Google front-page
 */
 
-let Web.Scrape = (url as text, optional options as record) =>
+(url as text, optional options as record) as binary =>
 
 let
-    Response = Web.Contents(url, options),
-	Return = if Binary.Length(Response) = 0
-        then error Error.Record("ScrapeFailed", Curl(url, options), null)
+    Web.Curl = Load("Web.Curl"),
+    Response = Binary.Buffer(Web.Contents(url, options)),
+    Meta = try Value.Metadata(Response) otherwise null,
+	Status = if Response = null then 0 else Meta[Response.Status],
+	Return = if Status = 0 or Status >= 400  // Binary.Length(Response) = 0
+        then error Error.Record("ScrapeFailed", Web.Curl(url, options), Meta)
         else Response
 in
     Return
-
-in Web.Scrape
 

@@ -8,11 +8,11 @@
 //Result: [an expanded version of the given table with nested tables]
 */
 
-let Table.ExpandTables = (
+(
     TableToExpand as table,                    //the table you wish to expand
     optional ColumnNames as list,             //the columns to expand
     optional AppendParentNames as logical    //whether to use append parent column names e.g. "ul.li", or just keep "li" where possible (reverting to the qualified name in case of a colum name clash)
-) =>
+) as table =>
 let
     ColumnNames = if (ColumnNames=null) then Table.ColumnNames(TableToExpand) else ColumnNames,
     count = List.Count(ColumnNames),
@@ -41,6 +41,3 @@ List.Last(
         each [Tbl]
     )
 )
-
-in
-    Table.ExpandTables

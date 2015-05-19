@@ -6,7 +6,7 @@
 //Result: "bcdef"
 */
 
-let Text.FromTo = (Haystack as text, From as text, UpTo as text) =>
+(Haystack as text, From as text, UpTo as text) as text =>
 let
     CutAfter = Text.Split(Haystack, From),
     CutBefore = Text.Split(CutAfter{1}, UpTo),
@@ -14,5 +14,4 @@ let
        then (if List.Count(CutBefore) > 1 then From & CutBefore{0} & UpTo else Error.Record("FindTextFailed","The text did not contain the keyword " & UpTo, Haystack))
        else error Error.Record("FindTextFailed","The text did not contain the keyword " & From, Haystack)
 in Needle
-in Text.FromTo
 

@@ -6,8 +6,7 @@
 //Result: {[num=1, let="a"],[num=2, let="b"],[num=3, let="c"]}
 */
 
-let
-    List.Zip = (listOfLists as list, optional names as list) =>
+(listOfLists as list, optional names as list) as list =>
 let
 	max = List.Max(List.Transform(listOfLists, each List.Count(_))),
 	zipped = List.Skip(List.Generate(
@@ -27,6 +26,4 @@ let
 	tablized = Table.FromRecords(zipped) //Table.FromRows
 in
 	tablized
-
-in List.Zip
 

@@ -7,7 +7,7 @@
     newText	
 //Result: newText = "abc"
 */
-let (inputtext) =>
+(inputtext as text) as text =>
 let
     //get a list of lists containing the numbers of Unicode punctuation characters
     numberlists = {{0..31},{33..47},{58..64},{91..96},{123..191}},

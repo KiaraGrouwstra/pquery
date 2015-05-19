@@ -6,7 +6,7 @@
 //Result: #table({"A","B"},{{"A",1},{"A",2},{"A",3},{"B",1},{"B",2},{"B",3}})
 */
 
-let List.CrossJoin = (A as list, B as list) =>
+(A as list, B as list) as table =>
 
 let
 	firstList = List.RemoveNulls(A),
@@ -17,6 +17,4 @@ let
 	resultSecondList = List.Repeat( secondList, firstLength)
 in
 	Table.FromColumns({resultFirstList, resultSecondList})
-
-in List.CrossJoin
 

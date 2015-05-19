@@ -9,7 +9,7 @@
 //Result: #table({"A","B"},{{"A",1},{"A",2},{"A",3},{"B",1},{"B",2},{"B",3}})
 */
 
-let Table.CrossJoin = (A as any, B as any) =>
+(A as any, B as any) as any =>
 
 let
     TableA = if A is table then A else Table.FromValue(A),
@@ -22,5 +22,4 @@ let
     Expand = Table.ExpandTableColumn(Merged, "Table", ColumnsToExpand)
 in
     Expand
-in Table.CrossJoin
 

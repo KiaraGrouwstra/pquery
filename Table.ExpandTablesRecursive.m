@@ -8,11 +8,11 @@
 //Result: [an expanded version of the given table with nested tables]
 */
 
-let Table.ExpandTablesRecursive = (
+(
     TableToExpand as table,                    //the table you wish to expand
     optional ColumnNumber as number,        //the column number to expand
     optional AppendParentNames as logical    //whether to use append parent column names e.g. "ul.li", or just keep "li" where possible (reverting to the qualified name in case of a colum name clash)
-) =>
+) as table =>
 let
     ColumnNumber = if (ColumnNumber=null) then 0 else ColumnNumber,
     AppendParentNames = if (AppendParentNames=null) then false else AppendParentNames
@@ -43,7 +43,4 @@ List.Last(
         each [Tbl]
     )
 )
-
-in
-    Table.ExpandTablesRecursive
 

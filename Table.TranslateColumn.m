@@ -7,16 +7,11 @@
 //Result: #table({"Possible"},{{"Nope"},{"Yes"}})
 */
 
-let Table.TranslateColumn = (Tbl as table, OldCol as text, NewColName as text, TranslationList as list) =>
+(Tbl as table, OldCol as text, NewColName as text, TranslationList as list) as table =>
 
 let
-	Renamed = Table.RenameColumns(Tbl, {OldCol, "TemporaryColumnName"}),
-	//Don't know how to refer to a dynamically named column for within an each construction
-	ColAdded = Table.AddColumn(Renamed, NewColName, each List.ReplaceMatchingItems({[TemporaryColumnName]}, TranslationList)),
-	NamedBack = Table.RenameColumns(ColAdded, {"TemporaryColumnName", OldCol}),
-    Columnized = Table.ExpandListColumn(NamedBack, NewColName)
+	ColAdded = Table.AddColumn(Tbl, NewColName, each List.ReplaceMatchingItems({Record.Field(_, OldCol)}, TranslationList)),
+    Columnized = Table.ExpandListColumn(ColAdded, NewColName)
 in 
     Columnized
-in
-    Table.TranslateColumn
 

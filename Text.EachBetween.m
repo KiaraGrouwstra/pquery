@@ -6,13 +6,11 @@
 //Result: {"bc", "d"}
 */
 
-let Text.EachBetween = (Haystack as text, After as text, Before as text) =>
+(Haystack as text, After as text, Before as text) as list =>
 let
     CutAfter = Text.Split(Haystack, After),
 	SkipFirst = List.Skip(CutAfter),
     CutEach = List.Transform(SkipFirst, each Text.Split(_, Before){0})
 in 
     CutEach
-in
-    Text.EachBetween
 

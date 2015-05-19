@@ -6,8 +6,7 @@
 //Result: true
 */
 
-let
-    Text.ContainsAny = (str as text, needles as list) =>
+(str as text, needles as list) as logical =>
 let
 	count = List.Count(needles)
 in
@@ -20,6 +19,4 @@ List.AnyTrue(
 		each Text.Contains(str,needles{[i]})
 	)
 )
-
-in Text.ContainsAny
 

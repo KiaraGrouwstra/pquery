@@ -7,15 +7,12 @@
 //Result: 00:00:00
 */
 
-let Function.Profile = (fn as function, params as list) =>
-
+(fn as function, params as list) as datetime =>
 let
     TimeBefore = DateTime.LocalNow(),
 	evaluated = Function.Invoke(fn, params),
     TimeAfter = (try evaluated as none otherwise DateTime.LocalNow()),
+// ^ always evaluates to otherwise, just using the expression as a dummy to force getting the time only after evaluation has finished
     TimeTaken = TimeAfter - TimeBefore
 in
     TimeTaken
-
-in Function.Profile
-

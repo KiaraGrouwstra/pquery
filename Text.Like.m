@@ -7,7 +7,7 @@
 */
 
 //Originally written by Chris Webb: https://cwebbbi.wordpress.com/2014/05/27/implementing-a-basic-likewildcard-search-function-in-power-query/
-let Text.Like = (Phrase as text, Pattern as text) =>
+(Phrase as text, Pattern as text) as logical =>
 let
     //Split pattern up into a list using % as a delimiter
     PatternList = Text.Split(Pattern, "%"),
@@ -49,5 +49,3 @@ let
     Output = StartsTest and EndsText and PhraseFind(Phrase, PatternList) 
 in
     Output
-in
-    Text.Like
