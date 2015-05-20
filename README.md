@@ -7,6 +7,8 @@ Rather than manually adding the functions to different Excel workbooks, users ca
 
 To manually add the Load query, click 'From Other Sources' in the Power Query ribbon tab, select 'Blank Query' (bottom option), open the Advanced Editor in the View tab, and paste in the below snippet (after adjusting file path). Click Done, name the query 'Load', and click 'Apply & Close' in the Home tab.
 
+If you have your M queries in files, you may well prefer to edit them from a text editor like Notepad++. With Matt Mason's [language file](http://www.mattmasson.com/2014/11/notepad-language-file-for-the-power-query-formula-language-m/) for this you will get nice color coding too! 
+
 The main point here is that by separating universally useful functions from an individual workbook, you will feel encouraged to use more modular code, solving each common sub-problem only once, rather than remaining stuck in 'vanilla' M and resolving the same problems repeatedly.
 
 Moreover, coding this way will also further facilitate sharing code with other Power Query users, allowing for a more collaborative environment.
