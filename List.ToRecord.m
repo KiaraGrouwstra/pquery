@@ -10,7 +10,7 @@ in
 //Result: [a="A", b="B"]
 */
 
-(List as record, Lambda as function) as record =>
+(List as list, Lambda as function) as record =>
 let
     Transformed = List.Transform(List, Lambda)	//each Lambda(_)
 in
