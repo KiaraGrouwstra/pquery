@@ -4,7 +4,7 @@
     Text.Between = Load("Text.Between"),
     Function.Profile = Load("Function.Profile"),
     Function.Profile(Text.Between, {"abcdef", "bc", "f"})
-//Result: 00:00:00
+//Result: "de" meta 00:00:00
 */
 
 (fn as function, params as list) as datetime =>
@@ -15,4 +15,4 @@ let
 // ^ always evaluates to otherwise, just using the expression as a dummy to force getting the time only after evaluation has finished
     TimeTaken = TimeAfter - TimeBefore
 in
-    TimeTaken
+    evaluated meta TimeTaken
