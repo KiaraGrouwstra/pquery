@@ -15,4 +15,4 @@ let
 // ^ always evaluates to otherwise, just using the expression as a dummy to force getting the time only after evaluation has finished
     TimeTaken = TimeAfter - TimeBefore
 in
-    evaluated meta TimeTaken
+    evaluated meta [taken=TimeTaken]
