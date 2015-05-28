@@ -6,8 +6,10 @@
 //Result: "list"
 */
 
+let Type.ToText =
 (Type as any, optional Recurs as logical) as text =>
 let
+    Record.TransformJoin = Load("Record.TransformJoin"),
     Recurs = if (Recurs<>null) then Recurs else false,
 
     CaseValues = {
@@ -18,7 +20,7 @@ let
     { (x)=> Type.Is(x, type record), if Recurs then
         let
             Record = Type.RecordFields(NonNull)
-        in "[" & Record_TransformJoin(Record, (k,v) =>
+        in "[" & Record.TransformJoin(Record, (k,v) =>
             (if v[Optional] then "optional " else "") & Expression.Identifier(k) & " = " & @Type.ToText(v[Type], Recurs)
         ) & "]"
     else "record"},
@@ -43,4 +45,4 @@ let
     else (if Type.IsNullable(Type) then "nullable " else "")
     & List.First(List.Select(CaseValues, each _{0}(NonNull))){1}
 in Return
-
+in Type.ToText

@@ -7,7 +7,7 @@
 //Result: #table({"Tel."},{{"234"},{"123"}})
 */
 
-(Source as Table, aCol as text, bCol as text) as table => let
+(Source as table, aCol as text, bCol as text) as table => let
     colName = "SomeCustomColName",
     InsertedCustom = Table.AddColumn(Source, colName, each if Record.Field(_,aCol)=null then Record.Field(_,bCol) else Record.Field(_,aCol) ),
     RemovedColumns = Table.RemoveColumns(InsertedCustom,{aCol, bCol}),

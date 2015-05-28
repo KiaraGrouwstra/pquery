@@ -6,8 +6,11 @@
 //Result: "{1, 2, 3}"
 */
 
+let Value.ToText =
 (Val as any, optional RecursTypes as logical) as text =>
 let
+    Record.TransformJoin = Load("Record.TransformJoin"),
+    Type.ToText = Load("Type.ToText"),
     RecursTypes = if (RecursTypes<>null) then RecursTypes else false,
     Tried = (try Val),
     Value = if Tried[HasError] then Tried[Error] else Tried[Value],
@@ -20,7 +23,7 @@ let
 */
     CaseValues = {
     //{ (x)=> (try x)[HasError], "error " & @Value.ToText((try Value)[Error], RecursTypes) },
-    { (x)=> Value.Is(x, type type), Type_ToText(Value, RecursTypes) },
+    { (x)=> Value.Is(x, type type), Type.ToText(Value, RecursTypes) },
     { (x)=> Value.Is(x, type function),
         let
             Type = Value.Type(Value),
@@ -29,7 +32,7 @@ let
             Ret = Type.FunctionReturn(Type)
         in
         "function (" &
-        Record_TransformJoin(Params, (k,v) =>
+        Record.TransformJoin(Params, (k,v) =>
             (if List.PositionOf(Record.FieldNames(Params), k) >= Reqd then "optional " else "") &
             k & " as " & @Value.ToText(v, RecursTypes)
         )
@@ -37,7 +40,7 @@ let
     },
     { (x)=> Value.Is(x, type table), "#table(" & @Value.ToText(Table.ColumnNames(Value), RecursTypes) & ", " & @Value.ToText(Table.ToRows(Value), RecursTypes) & ")"},
     { (x)=> Value.Is(x, type record), "[" &
-        Record_TransformJoin(Value, (k,v) => k & "=" & @Value.ToText(v, RecursTypes))
+        Record.TransformJoin(Value, (k,v) => k & "=" & @Value.ToText(v, RecursTypes))
     & "]" },
     { (x)=> Value.Is(x, type list), "{" & Text.Combine(List.Transform(Value, each @Value.ToText(_, RecursTypes)), ", ") & "}" },
     { (x)=> x = null, "null" },
@@ -70,4 +73,4 @@ let
     },
     Return = List.First(List.Select(CaseValues, each _{0}(Value))){1}
 in Return
-
+in Value.ToText
