@@ -1,6 +1,7 @@
 ﻿let
     Type.ToText = Load("Type.ToText"),
     Value.ToText = Load("Value.ToText"),
+    Text.Count = Load("Text.Count"),
     Source = M_library,
     Functions = Table.SelectRows(Source, each Value.Is([Value], type function)),
     AddFType = Table.AddColumn(Functions, "FType", each Value.Type([Value])),
@@ -14,7 +15,8 @@
     AddReqd = Table.AddColumn(AddNumPars, "Required", each Type.FunctionRequiredParameters([FType])),
     AddSig = Table.AddColumn(AddReqd, "Signature", each Value.ToText([Value])),
     AddSigRec = Table.AddColumn(AddSig, "SigRecursive", each [Name] & " => " & Value.ToText([Value], true)),
-    GoodCols = Table.RemoveColumns(AddSigRec, {"Type", "TypeRecurs"}),
+    AddTally = Table.AddColumn(AddSigRec, "Times Used", each Text.Count(Text_Queries, [Name])),
+    GoodCols = Table.RemoveColumns(AddTally, {"Type", "TypeRecurs"}),
     Return = GoodCols
 in
     Return
