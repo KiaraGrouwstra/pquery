@@ -30,6 +30,7 @@ let
         Headers = []
     ],
     Count = List.Count(Urls)
+    Web.Scrape = Load("Web.Scrape"),
 in
 
 List.Buffer(
@@ -44,7 +45,7 @@ List.Buffer(
                 Url = Urls{[i]},
                 GetPage = (uri as text) => Text.FromBinary(
                     //Binary.Buffer(Web.Contents(uri, Options))
-                    Web_Scrape(uri, Options)
+                    Web.Scrape(uri, Options)
                 , Encoding)
             in [
                 i = [i] + 1,
