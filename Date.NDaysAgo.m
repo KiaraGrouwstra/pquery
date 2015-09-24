@@ -9,4 +9,4 @@
 */
 
 (N as number) => 
-	Date.From(Date.AddDays(DateTime.FixedLocalNow(), -N))
+	Date.AddDays(DateTime.FixedLocalNow(), -N)
