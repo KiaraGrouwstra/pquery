@@ -6,10 +6,12 @@
 //Result: "de"
 */
 
-let Text.Between = (Haystack as text, After as text, Before as text, optional Backward as logical) =>
+(Haystack as text, After as text, Before as text) as text =>
 let
-    CutAfter = if Backward = true then Text.Split(Haystack, Before){0} else Text.Split(Haystack, After){1},
-    Needle = if Backward = true then List.Last(Text.Split(CutAfter, After)) else Text.Split(CutAfter, Before){0}
+    CutAfter = Text.Split(Haystack, After),
+    CutBefore = Text.Split(CutAfter{1}, Before),
+    Needle = if List.Count(CutAfter) > 1
+       then (if List.Count(CutBefore) > 1 then CutBefore{0} else Error.Record("FindTextFailed","The text did not contain the keyword " & Before, Haystack))
+       else error Error.Record("FindTextFailed","The text did not contain the keyword " & After, Haystack)
 in Needle
-in Text.Between
 

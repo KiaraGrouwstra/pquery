@@ -9,12 +9,12 @@
 //Result: #table({"country","language","continent","population"},{{"US", "English", "Americas", 316148990},{"Netherlands", "Dutch", "Europe", 16770000},{"Japan", "Japanese", "Asia", 127600000}})
 */
 
-let Table.JoinMany = (
+(
 	tables as list,							//the tables you wish to join
 	key as any,								//the key(s) to join them by, either as single string or as a list with 1 key per table
 	//names as list,						//names of the tables used for prefixing identically named columns
 	optional joinKind as nullable number	//how to join the tables: JoinKind.Inner (default), JoinKind.LeftOuter, JoinKind.RightOuter, JoinKind.FullOuter, JoinKind.LeftAnti, JoinKind.RightAnti
-) =>
+) as table =>
 let
 	joinKind = if (joinKind=null) then JoinKind.Inner else joinKind,
 	count = List.Count(tables),
@@ -58,6 +58,3 @@ let
 
 in
 	Reordered
-
-in
-    Table.JoinMany

@@ -5,7 +5,8 @@
     Source = Files.SheetsInFolder("C:\path\to\my\folder\")
 //Result: [a table containing the binary file content, file names, sheet tables, and sheet names for each sheet in each spreadsheet in the given folder]
 */
-let SheetsInFolder = (folderPath as text) =>
+
+(folderPath as text) as table =>
 let
     Source = Folder.Files(folderPath),
     FilteredRows = Table.SelectRows(Source, each Text.Start([Extension],3) = ".xl"),
@@ -16,4 +17,3 @@ let
     NoPrintAreas = Table.SelectRows(Expanded, each not Text.Contains([N], "$"))
 in
     NoPrintAreas
-in SheetsInFolder

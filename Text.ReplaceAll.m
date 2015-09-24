@@ -9,8 +9,7 @@
 //Result: "[test]"
 */
 
-let
-    Text.ReplaceAll = (str as text, Replacements as list) =>
+(str as text, Replacements as list) as text =>
 let
 	count = List.Count(Replacements)
 in
@@ -26,6 +25,4 @@ List.Last(
 		each [s]
 	)
 )
-
-in Text.ReplaceAll
 
