@@ -8,4 +8,5 @@
 	//Result depends on Today
 */
 
-Date.NDaysAgo = (N as number) => Date.From(Date.AddDays(DateTime.FixedLocalNow(), -N))
+(N as number) => 
+	Date.From(Date.AddDays(DateTime.FixedLocalNow(), -N))
