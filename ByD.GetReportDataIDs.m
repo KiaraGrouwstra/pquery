@@ -1,4 +1,5 @@
 /*
+        Get report data from SAP Business ByDesign using Power Query (through OData)
 	Example:	
 	ConnectionString = https://myXXXXXX.sapbydesign.com/sap/byd/odata/cc_home_analytics.svc/RPCRMCIVIB_Q0001QueryResults?$top=100000&
 	$select=CDOC_YEAR,CDOC_MONTH,KCNT_VAL_INV,CDOC_CANC_IND&$filter=CDOC_YEAR eq '2015' and CDOC_STA_RELEASE eq '3'
