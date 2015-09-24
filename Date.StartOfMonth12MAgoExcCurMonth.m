@@ -1,2 +1,2 @@
 () =>
-	Date.From(Date.StartOfMonth(Date.AddMonths(Date.From(DateTime.FixedLocalNow()), -12)))
+	Date.StartOfMonth(Date.AddMonths(Date.From(DateTime.FixedLocalNow()), -12))
