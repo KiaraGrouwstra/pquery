@@ -1,4 +1,5 @@
 /*
+        Get report data from SAP Business ByDesign using Power Query (through OData)
 	ByD.GetReportFiledsIdName pulls two columns Id and Name from report metadata
 	
 */
