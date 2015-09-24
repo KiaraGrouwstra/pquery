@@ -1,2 +1,2 @@
 () =>
-	Date.From(Date.StartOfYear(Date.From(DateTime.FixedLocalNow())))
+	Date.StartOfYear(Date.From(DateTime.FixedLocalNow()))
