@@ -1,6 +1,10 @@
 // Calculates a trend according to Excel's TREND-function but without the option to define your own slope and intercept.
 // Slope and intercept will be calculated according to the input data.
-// Just pass the values from the past that shall be considered (YList) and the number of intervalls (NoOfIntervalls) to be calculated for the future.
+// Use: Just pass the values from the past that shall be considered (YList) and the number of intervalls (NoOfIntervalls) to be calculated for the future.
+// Suggested improvement: Completely harmonize to EXCEL-TREND: 
+    // a) Options to omitt intercept ([CONST]=FALSE)
+    // b) Use specific [known_x's] instead of default {0...n} 
+    // c) Harmonize input parameter syntax 
 
 
 (YList as list, NoOfIntervalls as number) =>
