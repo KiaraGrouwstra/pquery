@@ -3,21 +3,21 @@
 //Usage:
 
 let
-    Web.FetchSequentially = Load("Web.FetchSequentially"),
+    Web.AddScrape = Load("Web.AddScrape"),
     BaseUrl = "http://example.com/?p=",
     Pages = List.Numbers(1, 5),
-    Urls = List.Transform(Pages, each BaseUrl & Number.ToText(_))
+    Tbl = Table.FromList(Pages),
 in
-    Web.FetchSequentially(Urls)
+    Web.AddScrape(Tbl, "Value", BaseUrl)
 
-//Result: [a list of decoded contents for each of the input URLs]
+//Result: [a table with the response bodies of the URLs with the given variables added into a new column]
 */
 
 (
-	Tbl as table,					//the table in question to add scrape results to
-	Col as text,					//the column of variable content to append to the base URL
-	BaseUrl as text,				//the base URL
-	optional newColName as text,	//the name of the new column to be added, default Content
+    Tbl as table,                   //the table in question to add scrape results to
+    Col as text,                    //the column of variable content to append to the base URL
+    BaseUrl as text,                //the base URL
+    optional newColName as text,    //the name of the new column to be added, default Content
     optional Delay as number,       //in seconds, default 1
     optional Encoding as number,    //https://msdn.microsoft.com/en-us/library/windows/desktop/dd317756(v=vs.85).aspx
     optional Options                //see options in Web.FetchSequentially
@@ -26,17 +26,15 @@ let
     newColName = if (newColName<>null) then newColName else "Content",
     Web.FetchSequentially = Load("Web.FetchSequentially"),
 
-	InputList = Table.Column(Tbl, Col),
-	InputUrls = List.Transform(InputList, each BaseUrl & Text.FromValue(_)),
-	InputRecord = Record.FromList(InputList, InputUrls),
-	DedupedKeys = Record.FieldNames(InputRecord),
-	DedupedVals = Record.FieldValues(InputRecord),
-	ScrapedList = Web.FetchSequentially(DedupedVals, Delay, Encoding, Options),
-	ScrapedRecord = Record.FromList(DedupedKeys, ScrapedList),
-	Merged = Table.AddColumn(Tbl, newColName, each Record.Field(ScrapedRecord, Record.Field(_, Col))),
-	Buffered = Table.Buffer(Merged),
+    InputList = Table.Column(Tbl, Col),
+    DedupedList = List.Distinct(InputList),
+    InputUrls = List.Transform(DedupedList, each BaseUrl & Expression.Constant(_)),
+    ScrapedList = Web.FetchSequentially(InputUrls, Delay, Encoding, Options),
+    ScrapedRecord = Record.FromList(ScrapedList, DedupedList),
+    Merged = Table.AddColumn(Tbl, newColName, each Record.Field(ScrapedRecord, Record.Field(_, Col))),
+    Buffered = Table.Buffer(Merged),
 
-	Return = Buffered
+    Return = Buffered
 in
-	Return
+    Return
 
