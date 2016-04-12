@@ -22,7 +22,7 @@ Admittedly, Microsoft languages have rarely been known for encouraging open-sour
 
 * [get](https://github.com/tycho01/pquery/archive/master.zip) and unzip this repo, or in case you'd like to contribute back, open a command prompt in your desired location (in Windows Explorer type `cmd` in the address bar) and run command `git clone https://github.com/tycho01/pquery.git`.
 * copy [`LoadPath.example.m`](https://github.com/tycho01/pquery/blob/master/LoadPath.example.m) as `LoadPath.m` and replace its entire content with the path where you put the query files; e.g. `"D:\pquery\"`.
-* manually import the `Load.m` and `LoadPath.m` functions into your workbook, keeping their names as `Load` and `LoadPath`.(*1)
+* manually import the `Load.m` and `LoadPath.m` functions into your workbook, keeping their names as `Load` and `LoadPath`.
 * now use the Load function to load queries from the folder you specified. i.e. if you write `Text_Between = Load("Text.Between"),`, it's going to give you the function located at `YOUR_PATH\Text.Between.m`.
 
 ### to allow sharing your workbook:
