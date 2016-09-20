@@ -4,6 +4,8 @@
 	Table.RowsCombination( {Table1, Table2} )
 	
 //Result: all possible combination of rows from Table1 and Table2
+// How it was created:
+// https://bondarenkoivan.wordpress.com/2016/09/20/combination-of-rows-of-tables-list-in-power-query/
 */
 
 (tables as list)=>
