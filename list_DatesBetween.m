@@ -8,7 +8,7 @@ let
 
     countOfDays = Number.From(dateFinish - dateStart),
     output = if countOfDays > 0 
-                then List.Dates(#date(2016,12,12), countOfDays, #duration(1,0,0,0))
+                then List.Dates(dateStart, countOfDays+1, #duration(1,0,0,0))
                 else "Error! Your inputs are incorrect. Check the inputs." 
 in
     output
