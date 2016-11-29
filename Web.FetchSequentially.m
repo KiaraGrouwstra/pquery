@@ -21,6 +21,7 @@ in
 ) as list =>
 
 let
+    Web.Scrape = Load("Web.Scrape"),
     Delay = if (Delay<>null) then Delay else 1,
     Encoding = if (Encoding<>null) then Encoding else TextEncoding.Utf8,
     Options = if (Options<>null) then Options else [
@@ -30,7 +31,6 @@ let
         Headers = []
     ],
     Count = List.Count(Urls)
-    Web.Scrape = Load("Web.Scrape"),
 in
 
 List.Buffer(

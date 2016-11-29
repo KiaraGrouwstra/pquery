@@ -10,12 +10,13 @@
 
 let
     Web.Curl = Load("Web.Curl"),
-    Response = Binary.Buffer(Web.Contents(url, options)),
+    Response = Web.Contents(url, options),
+    Buffered = Binary.Buffer(Response),
     Meta = try Value.Metadata(Response) otherwise null,
-	Status = if Response = null then 0 else Meta[Response.Status],
-	Return = if Status = 0 or Status >= 400  // Binary.Length(Response) = 0
+	Status = if Buffered = null then 0 else Meta[Response.Status],
+	Return = if Status = 0 or Status >= 400  // Binary.Length(Buffered) = 0
         then error Error.Record("ScrapeFailed", Web.Curl(url, options), Meta)
-        else Response
+        else Buffered
 in
     Return
 
