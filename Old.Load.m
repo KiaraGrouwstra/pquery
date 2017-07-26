@@ -11,7 +11,7 @@ Using Load() would not only allow you to use functions in their intended naming 
 
 Parameters:
     fnName: name of the text file you wish to load without the .m extension
-	optional BasePath: the file path to look in for the text file; default path hardcoded
+    optional BasePath: the file path to look in for the text file; defaults to the path specified in the LoadPath query.
 
 Usage:
     // loads the function Type.ToText from file 'Type.ToText.m' in the load path
@@ -27,32 +27,11 @@ Warning: this function may triggers a Formula.Firewall error for referencing bot
 If you run into this, you can get around this by enabling the FastCombine option, in Power Query Options -> Privacy -> Fast Combine -> 'Ignore the 
 Privacy levels and potentially improve performance'.
 
-If you'd prefer not to do this however, you could also just replace the LoadPath/DefaultPath reference below with a static
-absolute path reference.
+If you'd prefer not to do this however, you could also just replace the LoadPath reference below with a static absolute path reference.
 
 */
 
 (fnName as text, optional BasePath as text) as function =>
-// IvanBond version
-let
-    //If you wish to hardcode the path to load the queries from, you can edit the following line:
-    DefaultPath = "C:\PQuery\",
-    GitHubPath = "https://raw.githubusercontent.com/hohlick/pquery/master/",
-    
-    BasePath = if (BasePath <> null) then BasePath else DefaultPath,
-    Path = BasePath & (if Text.End(BasePath, 1) <> "\" then "\" else ""),
-    File = Path & fnName & ".m",
-    
-    Function = try Expression.Evaluate(Text.Replace(fnName, ".", "_"), #shared)  //if already imported into the workbook just use the existing one
-	otherwise try Expression.Evaluate(Text.FromBinary(Binary.Buffer(File.Contents(File))), #shared) //if not imported yet try loading it from the text file in the folder
-	otherwise Expression.Evaluate( Text.FromBinary(Binary.Buffer(Web.Contents(GitHubPath & fnName & ".m"))), #shared) // if folder not found - take from GitHubPath
-in
-	Function
-/*
-Here comes old Load.m function:	
-
-(fnName as text, optional BasePath as text) as function =>
-
 let
     //If you wish to hardcode the path to load the queries from, you can edit the following line:
     DefaultPath = LoadPath,
@@ -69,4 +48,4 @@ let
 		otherwise Expression.Evaluate(Source, #shared)	//if not imported yet try loading it from the text file in the folder
 in
     Function
-*/
+
