@@ -19,25 +19,12 @@ let
     AppendParentNames = if (AppendParentNames=null) then false else AppendParentNames
 in
 
-List.Last(
-    List.Generate(
-        ()=>[
-            i = 0,
-            Tbl = TableToExpand
-        ],
-        each [i] <= count,
-        each let
-            ColumnName = ColumnNames{[i]},
-            ColumnsToExpand = List.Distinct(List.Combine(List.Transform(Table.Column([Tbl], ColumnName),
-                each if _ is record then Record.FieldNames(_) else {}))),
-            NewColumnNames = List.Transform(ColumnsToExpand, each if (AppendParentNames or List.Contains(ColumnNames,_)) then ColumnName & "." & _ else _),
-            CanExpandCol = List.Count(ColumnsToExpand) > 0
-        in [
-            i = [i] + 1,
-            Tbl = if CanExpandCol
-                then Table.ExpandRecordColumn([Tbl], ColumnName, ColumnsToExpand, NewColumnNames)
-                else [Tbl]
-        ],
-        each [Tbl]
-    )
+List.Accumulate(ColumnNames, TableToExpand, (tbl, col) => let
+    ColumnsToExpand = List.Distinct(List.Combine(List.Transform(Table.Column(tbl, col),
+        each if _ is record then Record.FieldNames(_) else {}))),
+    NewColumnNames = List.Transform(ColumnsToExpand, each if (AppendParentNames or List.Contains(ColumnNames,_)) then col & "." & _ else _),
+    CanExpandCol = List.Count(ColumnsToExpand) > 0
+in if CanExpandCol
+    then Table.ExpandRecordColumn(tbl, col, ColumnsToExpand, NewColumnNames)
+    else tbl
 )
