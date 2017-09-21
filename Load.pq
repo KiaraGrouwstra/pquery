@@ -10,7 +10,7 @@ Nevertheless, if the function in question has already been imported into the wor
 Using Load() would not only allow you to use functions in their intended naming conventions (i.e. Text.ReplaceAll rather than with the period replaced by an underscore), but would technically also allow you to add additional wrapper functions around your code, which could be used to enable persistent memoization (using say Redis) or code profiling calls... though presumably no-one has done this so far yet.
 
 Parameters:
-    fnName: name of the text file you wish to load without the .m extension
+    fnName: name of the text file you wish to load without the .pq extension
 	optional BasePath: the file path to look in for the text file; default path hardcoded
 
 Usage:
@@ -45,11 +45,11 @@ let
     
     Function = try Expression.Evaluate(Text.Replace(fnName, ".", "_"), #shared)  //if already imported into the workbook just use the existing one
 	otherwise try Expression.Evaluate(Text.FromBinary(Binary.Buffer(File.Contents(File))), #shared) //if not imported yet try loading it from the text file in the folder
-	otherwise Expression.Evaluate( Text.FromBinary(Binary.Buffer(Web.Contents(GitHubPath & fnName & ".m"))), #shared) // if folder not found - take from GitHubPath
+	otherwise Expression.Evaluate( Text.FromBinary(Binary.Buffer(Web.Contents(GitHubPath & fnName & ".pq"))), #shared) // if folder not found - take from GitHubPath
 in
 	Function
 /*
-Here comes old Load.m function:	
+Here comes old Load.pq function:	
 
 (fnName as text, optional BasePath as text) as function =>
 
