@@ -1,7 +1,7 @@
 // Function that converts number from decimal to binary notation
 //
 // Usage:
-// Number.ToBinaryString( 1026 )
+// Number.Dec2Bin( 1026 )
 // result: 10000000010
 // Same as Excel funciton DEC2BIN
 // https://support.office.com/en-us/article/DEC2BIN-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838
