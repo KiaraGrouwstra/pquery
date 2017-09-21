@@ -36,12 +36,7 @@ let
 			remove_other,
 
 // loop through list of numbers (each element is qty of table rows)
-	generator = List.Last( List.Generate(
-		() => [i=0, L=list_as_numbers{0}], // initial list
-		each [i] <= List.Count( tableslist )-1,
-		each [i=[i]+1,
-			L = Table.Column( list_crossjoin( [L], list_as_numbers{[i]+1} ), "Merged") ],
-		each [L] ) ),
+	generator = List.Accumulate(list_as_numbers, null, (acc, x) => if acc = null then x else Table.Column(list_crossjoin(acc, x), "Merged")),
 
 // function that collects corresponding records (rows) from initial tables - loop through combination of indices
 	get_tables_rows = (combination as text) => List.Last( List.Generate(
