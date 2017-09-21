@@ -1,5 +1,5 @@
 /*
-Allows dynamically loading an M function from a text file (extension: .m) for use in Power Query. 
+Allows dynamically loading an M function from a text file (extension: .pq) for use in Power Query. 
 This allows you to easily reuse a set of functions in multiple workbooks without having to sync each change to
 all files using it.
 
@@ -20,11 +20,11 @@ also allow you to add additional wrapper functions around your code, which could
 persistent memoization (using say Redis) or code profiling calls... though presumably no-one has done this so far yet.
 
 Parameters:
-    fnName: name of the text file you wish to load without the .m extension
+    fnName: name of the text file you wish to load without the .pq extension
     optional BasePath: the file path to look in for the text file; default path hardcoded
 
 Usage:
-    // loads the function Type.ToText from file 'Type.ToText.m' in the load path
+    // loads the function Type.ToText from file 'Type.ToText.pq' in the load path
 let
     Type.ToText = Load("Type.ToText")
 in
@@ -51,9 +51,9 @@ let
     
     BasePath = if (BasePath <> null) then BasePath else DefaultPath,
     Path = BasePath & (if Text.End(BasePath, 1) <> "\" then "\" else ""),
-    File = Path & fnName & ".m",
+    File = Path & fnName & ".pq",
     
     Function = try Expression.Evaluate(Text.FromBinary(Binary.Buffer(File.Contents(File))), #shared)
-	otherwise Expression.Evaluate( Text.FromBinary(Binary.Buffer(Web.Contents(GitHubPath & fnName & ".m"))), #shared)
+	otherwise Expression.Evaluate( Text.FromBinary(Binary.Buffer(Web.Contents(GitHubPath & fnName & ".pq"))), #shared)
 in
 	Function

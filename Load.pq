@@ -1,5 +1,5 @@
 /*
-Allows dynamically loading an M function from a text file (extension: .m) in a given folder for use in Power Query. This allows you to easily reuse  a set of functions in multiple workbooks without having to sync each change to all files using it.
+Allows dynamically loading an M function from a text file (extension: .pq) in a given folder for use in Power Query. This allows you to easily reuse  a set of functions in multiple workbooks without having to sync each change to all files using it.
 
 The point here is that by separating universally useful functions from an individual workbook, you will feel encouraged to use more modular code,  solving each common sub-problem only once, rather than remaining stuck in 'vanilla' M and resolving the same problems repeatedly.
 
@@ -10,11 +10,11 @@ Nevertheless, if the function in question has already been imported into the wor
 Using Load() would not only allow you to use functions in their intended naming conventions (i.e. Text.ReplaceAll rather than with the period replaced by an underscore), but would technically also allow you to add additional wrapper functions around your code, which could be used to enable persistent memoization (using say Redis) or code profiling calls... though presumably no-one has done this so far yet.
 
 Parameters:
-    fnName: name of the text file you wish to load without the .m extension
+    fnName: name of the text file you wish to load without the .pq extension
 	optional BasePath: the file path to look in for the text file; default path hardcoded
 
 Usage:
-    // loads the function Type.ToText from file 'Type.ToText.m' in the load path
+    // loads the function Type.ToText from file 'Type.ToText.pq' in the load path
 let
     Type.ToText = Load("Type.ToText")
 in
@@ -41,15 +41,15 @@ let
     
     BasePath = if (BasePath <> null) then BasePath else DefaultPath,
     Path = BasePath & (if Text.End(BasePath, 1) <> "\" then "\" else ""),
-    File = Path & fnName & ".m",
+    File = Path & fnName & ".pq",
     
     Function = try Expression.Evaluate(Text.Replace(fnName, ".", "_"), #shared)  //if already imported into the workbook just use the existing one
 	otherwise try Expression.Evaluate(Text.FromBinary(Binary.Buffer(File.Contents(File))), #shared) //if not imported yet try loading it from the text file in the folder
-	otherwise Expression.Evaluate( Text.FromBinary(Binary.Buffer(Web.Contents(GitHubPath & fnName & ".m"))), #shared) // if folder not found - take from GitHubPath
+	otherwise Expression.Evaluate( Text.FromBinary(Binary.Buffer(Web.Contents(GitHubPath & fnName & ".pq"))), #shared) // if folder not found - take from GitHubPath
 in
 	Function
 /*
-Here comes old Load.m function:	
+Here comes old Load.pq function:	
 
 (fnName as text, optional BasePath as text) as function =>
 
@@ -59,8 +59,8 @@ let
     //DefaultPath = "D:\pquery",
     BasePath = if (BasePath<>null) then BasePath else DefaultPath,
 	Path = BasePath & (if Text.End(BasePath, 1) <> "\" then "\" else ""),
-    File = Path & fnName & ".m",
-    AltFile = Path & Text.Replace(fnName, "_", ".") & ".m",  //just in case...
+    File = Path & fnName & ".pq",
+    AltFile = Path & Text.Replace(fnName, "_", ".") & ".pq",  //just in case...
     Source = Text.FromBinary(Binary.Buffer(
 		try File.Contents(File)
 		otherwise File.Contents(AltFile)
