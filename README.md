@@ -28,3 +28,17 @@ Admittedly, Microsoft languages have rarely been known for encouraging open-sour
 ### to allow sharing your workbook:
 
 * use [my Power Query workbook](http://1drv.ms/1GmrhDl) (requires Excel 2016) to batch import the desired queries into your workbook. Chris Webb also posted the used [VBA code](http://1drv.ms/1KUxm9g), and did an introductory [blog post](https://blog.crossjoin.co.uk/2015/06/10/power-queryexcel-2016-vba-examples/) about it.
+
+## Related Projects (feel free to add!)
+- [`Power-BI-Desktop-Query-Extensions`](https://github.com/tnclark8012/Power-BI-Desktop-Query-Extensions) - newer library including in-app function documentation
+- [`PowerQueryExtensions`](https://github.com/Hugoberry/PowerQueryExtensions) - library using the recent [`DataConnectors`](https://github.com/Microsoft/DataConnectors) API to expose the functions from this and the above library
+- [`m-tools`](https://github.com/acaprojects/m-tools) - functional programming helpers
+- [`PowerQueryFunctional`](https://github.com/Hugoberry/PowerQueryFunctional) - `DataConnectors` port of the above library
+- [`atom-language-m`](https://github.com/jaykilleen/atom-language-m) - Atom support for M
+
+For more Power Query related repos check out some of the following users (sorted alphabetically, feel free to add!):
+- [@acaprojects](https://github.com/acaprojects?tab=repositories)
+- [@hohlick](https://github.com/hohlick?tab=repositories)
+- [@Hugoberry](https://github.com/Hugoberry?tab=repositories)
+- [@IvanBond](https://github.com/IvanBond?tab=repositories)
+- [@maxim-uvarov](https://github.com/maxim-uvarov?tab=repositories)
