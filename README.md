@@ -35,6 +35,7 @@ Admittedly, Microsoft languages have rarely been known for encouraging open-sour
 - [`m-tools`](https://github.com/acaprojects/m-tools) - functional programming helpers
 - [`PowerQueryFunctional`](https://github.com/Hugoberry/PowerQueryFunctional) - `DataConnectors` port of the above library
 - [`atom-language-m`](https://github.com/jaykilleen/atom-language-m) - Atom support for M
+- [`LibPQ`](https://github.com/sio/LibPQ) - a collection of reusable modules for Power Query M Language
 
 For more Power Query related repos check out some of the following users (sorted alphabetically, feel free to add!):
 - [@acaprojects](https://github.com/acaprojects?tab=repositories)
