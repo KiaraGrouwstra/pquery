@@ -1,5 +1,5 @@
 ﻿let
-    Table.CrossJoin = Load("Table.Crossjoin"),
+    Table.CrossJoin = Load("Table.CrossJoin"),
     Tokens = Table.RenameColumns(Table.FromList(Record.FieldNames(#shared)), {"Column1", "Token"}),
     AddAlts = Table.AddColumn(Tokens, "TokenAlt", each Text.Replace([Token], "_", ".")),
     Crossed = Table.CrossJoin(AddAlts, UdfContents),
