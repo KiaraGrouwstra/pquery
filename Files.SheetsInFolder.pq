@@ -14,7 +14,7 @@ let
     NoTemps = Table.SelectRows(RemovedOtherColumns, each not Text.StartsWith([Name], "~$")),
     InsertedCustom = Table.AddColumn(NoTemps, "Sheets", each Excel.Workbook([Content])),
     Expanded = Table.ExpandTableColumn(InsertedCustom, "Sheets", {"Data", "Name","Kind"}, {"D","N","K"}),
-    NoPrintAreas = Table.SelectRows(Expanded, each not Text.Contains([N], "$"))
+    NoPrintAreas = Table.SelectRows(Expanded, each not Text.Contains([N], "$")),
     OnlySheets = Table.SelectRows(NoPrintAreas, each Text.Contains([K], "Sheet"))
 in
     OnlySheets
