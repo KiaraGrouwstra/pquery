@@ -17,7 +17,7 @@
         input = Number.IntegerDivide( num, 2 ),
 
         r = if input > 0 then
-            @fNumberToBinaryString( input , resulting_string)
+            @Number_Dec2Bin( input , resulting_string)
             else resulting_string
     in
         r
