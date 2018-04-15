@@ -41,5 +41,6 @@ For more Power Query related repos check out some of the following users (sorted
 - [@acaprojects](https://github.com/acaprojects?tab=repositories)
 - [@hohlick](https://github.com/hohlick?tab=repositories)
 - [@Hugoberry](https://github.com/Hugoberry?tab=repositories)
+- [@ImkeF](https://github.com/ImkeF/M/tree/master/Library)
 - [@IvanBond](https://github.com/IvanBond?tab=repositories)
 - [@maxim-uvarov](https://github.com/maxim-uvarov?tab=repositories)
