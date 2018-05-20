@@ -1,0 +1,5 @@
+/*
+  Convert unix timestamp into Power Query datetime formart
+*/
+
+(unixtime as number) as datetime => #datetime(1970, 01 , 01, 0, 0, 0) + #duration(0,0,0,unixtime)
