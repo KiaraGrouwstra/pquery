@@ -6,7 +6,7 @@
 //Result: true
 */
 
-(str as text, needles as list) as logical =>
+(str, needles) as logical =>
 let
 	count = List.Count(needles)
 in
