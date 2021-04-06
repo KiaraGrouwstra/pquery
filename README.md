@@ -4,7 +4,7 @@ This is a collection of functions written in the M language for use in Microsoft
 
 ## Introduction
 
-Rather than manually adding the functions to different Excel workbooks, users can instead leave their files in any directory, and either batch import them into your workbook using Excel 2016 VBA (see my sample workbook [here](http://1drv.ms/1GmrhDl)), or by dynamically loading them into Power Query using something like the `Load()` function (see `Load.pq`). To use Load() you'll need to add it to every applicable workbook though. You can hard-code in the path to the folder where you put the functions from this repository, or set it in the specified cell in the above-mentioned sample workbook for use in that.
+Rather than manually adding the functions to different Excel workbooks, users can instead leave their files in any directory, and either batch import them into your workbook using Excel 2016 VBA (see my sample workbook [here](https://1drv.ms/x/s!AjFffgoO_-9rgSSi7X6s7pOUhVb1?e=Iqjv6x)), or by dynamically loading them into Power Query using something like the `Load()` function (see `Load.pq`). To use Load() you'll need to add it to every applicable workbook though. You can hard-code in the path to the folder where you put the functions from this repository, or set it in the specified cell in the above-mentioned sample workbook for use in that.
 
 To manually add the Load query, click 'From Other Sources' in the Power Query ribbon tab, select 'Blank Query' (bottom option), open the Advanced Editor in the View tab, and paste in the below snippet (after adjusting file path). Click Done, name the query 'Load', and click 'Apply & Close' in the Home tab.
 
@@ -20,8 +20,8 @@ Admittedly, Microsoft languages have rarely been known for encouraging open-sour
 
 ### to use M code in workbooks without having to import every query/function:
 
-* [get](https://github.com/tycho01/pquery/archive/master.zip) and unzip this repo, or in case you'd like to contribute back, open a command prompt in your desired location (in Windows Explorer type `cmd` in the address bar) and run command `git clone https://github.com/tycho01/pquery.git`.
-* copy [`LoadPath.example.pq`](https://github.com/tycho01/pquery/blob/master/LoadPath.example.pq) as `LoadPath.pq` and replace its entire content with the path where you put the query files; e.g. `"D:\pquery\"`.
+* [get](https://github.com/KiaraGrouwstra/pquery/archive/master.zip) and unzip this repo, or in case you'd like to contribute back, open a command prompt in your desired location (in Windows Explorer type `cmd` in the address bar) and run command `git clone https://github.com/KiaraGrouwstra/pquery.git`.
+* copy [`LoadPath.example.pq`](https://github.com/KiaraGrouwstra/pquery/blob/master/LoadPath.example.pq) as `LoadPath.pq` and replace its entire content with the path where you put the query files; e.g. `"D:\pquery\"`.
 * manually import the `Load.pq` and `LoadPath.pq` functions into your workbook, keeping their names as `Load` and `LoadPath`.
 * now use the Load function to load queries from the folder you specified. i.e. if you write `Text_Between = Load("Text.Between"),`, it's going to give you the function located at `YOUR_PATH\Text.Between.pq`.
 
